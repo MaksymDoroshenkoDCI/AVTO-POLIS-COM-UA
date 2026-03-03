@@ -80,7 +80,7 @@ const Footer = () => {
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-200 pt-8 mt-4">
                     <p className="text-center text-gray-400 text-sm mb-2">
-                        © 2015 <strong className="text-gray-600">Avto-Polis.com.ua</strong> — Усі права захищені.
+                        © 2025 <strong className="text-gray-600">Avto-Polis.com.ua</strong> — Усі права захищені.
                     </p>
                     <p className="text-center text-gray-400 text-xs">
                         Використання матеріалів сайту дозволено лише з письмової згоди адміністрації.
