@@ -45,7 +45,7 @@ const Footer = () => {
                             </li>
                             <li className="flex items-start space-x-2">
                                 <MapPin className="h-4 w-4 text-gray-400 flex-shrink-0 mt-0.5" />
-                                <span>вул. Гарантійна, 12, Київ, Україна, 01001</span>
+                                <span>вул. Степана Рудницького, 12, Київ, Україна, 01001</span>
                             </li>
                             <li className="flex items-start space-x-2">
                                 <Clock className="h-4 w-4 text-gray-400 flex-shrink-0 mt-0.5" />
