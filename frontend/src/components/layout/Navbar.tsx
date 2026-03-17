@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Shield, Phone } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X, Phone } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,14 @@ const Navbar = () => {
                     {/* Logo + Social */}
                     <div className="flex items-center space-x-4">
                         <Link href="/" className="flex items-center space-x-2">
-                            <Shield className="h-8 w-8 text-blue-700" />
+                            <Image
+                                src="/avto-polis-logo345-ts1401833101-300x192.jpg"
+                                alt="Avto-Polis Logo"
+                                width={120}
+                                height={77}
+                                className="h-10 w-auto object-contain"
+                                priority
+                            />
                             <span className="text-xl font-bold text-gray-900 tracking-tight">Avto-Polis</span>
                         </Link>
                         {/* Social Icons */}

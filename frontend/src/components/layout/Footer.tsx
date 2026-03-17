@@ -1,6 +1,6 @@
-import React from 'react';
 import Link from 'next/link';
-import { Shield, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import Image from 'next/image';
+import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -10,7 +10,13 @@ const Footer = () => {
                     {/* Brand */}
                     <div className="space-y-5">
                         <Link href="/" className="flex items-center space-x-2">
-                            <Shield className="h-7 w-7 text-blue-700" />
+                            <Image
+                                src="/avto-polis-logo345-ts1401833101-300x192.jpg"
+                                alt="Avto-Polis Logo"
+                                width={100}
+                                height={64}
+                                className="h-8 w-auto object-contain"
+                            />
                             <span className="text-lg font-bold text-gray-900 tracking-tight">Avto-Polis.com.ua</span>
                         </Link>
                         <p className="text-gray-500 text-sm leading-relaxed">
