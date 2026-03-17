@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Shield, Car, Globe, Umbrella, Plane, CheckCircle, ArrowRight, Star, Quote, Phone, Mail, ChevronRight, Calculator, Lock, Gift, Search } from 'lucide-react';
 
 export default function Home() {
@@ -72,16 +73,19 @@ export default function Home() {
       name: 'Ірина Мостова',
       text: 'Оформлення автоцивілки зайняло всього кілька хвилин — все онлайн, без черг і паперів. Дуже зручно! Плюс приємно здивувала ціна. Рекомендую всім, хто цінує свій час!',
       rating: 5,
+      avatar: '/avatar_reviews_iryna.png',
     },
     {
       name: 'Олександр Кучеренко',
       text: "Їхали з родиною до Польщі — зелена карта була потрібна терміново. Оформили за 5 хвилин, одразу отримали PDF на пошту. Все чітко, без зайвих дзвінків. Надійний сервіс!",
       rating: 5,
+      avatar: '/avatar_reviews_oleksandr.png',
     },
     {
       name: 'Світлана Кравченко',
       text: 'Перед поїздкою до Італії вирішила не ризикувати — взяла туристичне страхування. І не дарма! У Римі звернулася до лікаря, і всі витрати покрили. Працює бездоганно!',
       rating: 5,
+      avatar: '/avatar_reviews_olia.png',
     },
   ];
 
@@ -93,8 +97,17 @@ export default function Home() {
     <div className="flex flex-col">
       {/* ═══════════════════════ HERO SECTION ═══════════════════════ */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-sky-100/50"></div>
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/avtocivilka-2048x1367.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px]"></div>
+        </div>
         {/* Decorative shapes */}
         <div className="absolute -right-32 -top-32 w-[700px] h-[700px] bg-blue-200/20 rounded-full blur-3xl"></div>
         <div className="absolute -left-32 bottom-0 w-[500px] h-[500px] bg-orange-200/15 rounded-full blur-3xl"></div>
@@ -133,7 +146,7 @@ export default function Home() {
                 className="inline-flex items-center justify-center px-8 py-4 bg-orange-500 text-white rounded-xl font-bold text-lg hover:bg-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/30 hover:-translate-y-0.5"
               >
                 <Phone className="h-5 w-5 mr-3" />
-                +380977172121
+                +38 (097) 717-21-21
               </a>
             </div>
           </div>
@@ -294,24 +307,28 @@ export default function Home() {
                 key={i}
                 className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-xl hover:border-transparent transition-all duration-500 relative group"
               >
+                <div className="flex items-center space-x-4 mb-5">
+                  <Image
+                    src={review.avatar}
+                    alt={review.name}
+                    width={80}
+                    height={80}
+                    className="w-20 h-20 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-bold text-gray-900 text-sm">{review.name}</p>
+                    <p className="text-gray-400 text-xs">Клієнт Avto-Polis</p>
+                  </div>
+                </div>
                 <Quote className="h-8 w-8 text-orange-200 mb-4 group-hover:text-orange-300 transition-colors" />
                 <div className="flex items-center space-x-1 mb-4">
                   {[...Array(review.rating)].map((_, j) => (
                     <Star key={j} className="h-4 w-4 fill-orange-400 text-orange-400" />
                   ))}
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed mb-6 italic">
+                <p className="text-gray-600 text-sm leading-relaxed italic">
                   &ldquo;{review.text}&rdquo;
                 </p>
-                <div className="flex items-center space-x-3 mt-auto">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {review.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 text-sm">{review.name}</p>
-                    <p className="text-gray-400 text-xs">Клієнт Avto-Polis</p>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
@@ -355,10 +372,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* ═══════════════════════ NEWS + EMAIL ═══════════════════════ */}
-      <section className="py-20 bg-white">
+      < section className="py-20 bg-white" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* News Card */}
@@ -397,7 +414,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }

@@ -22,8 +22,8 @@ export default function Contacts() {
                             </div>
                             <div>
                                 <h3 className="text-lg font-bold mb-1">Телефон</h3>
-                                <p className="text-gray-600">+38 (0XX) XXX-XX-XX</p>
-                                <p className="text-gray-600">+38 (0XX) XXX-XX-XX</p>
+                                <p className="text-gray-600">+38 (097)717-21-21</p>
+                                <p className="text-gray-600">+38 (063)439-29-59</p>
                             </div>
                         </div>
 
@@ -44,8 +44,8 @@ export default function Contacts() {
                             </div>
                             <div>
                                 <h3 className="text-lg font-bold mb-1">Адреса</h3>
-                                <p className="text-gray-600">м. Київ, вул. Прикладна, 1</p>
-                                <p className="text-gray-600">01001, Україна</p>
+                                <p className="text-gray-600">м. Київ, вул. Степана Руданського, 3/7</p>
+                                <p className="text-gray-600">03189, Україна</p>
                             </div>
                         </div>
 

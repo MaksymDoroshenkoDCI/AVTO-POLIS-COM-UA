@@ -67,7 +67,7 @@ const Navbar = () => {
                         </Link>
                         <a href="tel:+380977172121" className="px-5 py-2.5 bg-orange-500 text-white rounded-lg font-bold hover:bg-orange-600 transition-all text-sm shadow-md hover:shadow-lg flex items-center space-x-2">
                             <Phone className="h-4 w-4" />
-                            <span>+380977172121</span>
+                            <span>+38 (097) 717-21-21</span>
                         </a>
                     </div>
 
@@ -108,7 +108,7 @@ const Navbar = () => {
                             href="tel:+380977172121"
                             className="block w-full text-center px-5 py-3 bg-orange-500 text-white rounded-lg font-bold"
                         >
-                            +380977172121
+                            +38 (097) 717-21-21
                         </a>
                         {/* Mobile Social */}
                         <div className="flex items-center justify-center space-x-4 pt-4 border-t border-gray-100">
