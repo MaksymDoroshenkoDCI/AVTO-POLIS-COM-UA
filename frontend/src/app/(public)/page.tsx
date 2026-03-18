@@ -372,10 +372,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* ═══════════════════════ NEWS + EMAIL ═══════════════════════ */}
-      < section className="py-20 bg-white" >
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* News Card */}
@@ -414,7 +414,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section >
-    </div >
+      </section>
+    </div>
   );
 }
