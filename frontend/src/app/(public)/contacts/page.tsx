@@ -68,6 +68,20 @@ export default function Contacts() {
                     </div>
                 </div>
             </div>
+
+            {/* Map Section */}
+            <div className="mt-16 w-full h-[600px] bg-gray-100 border-t border-gray-100 overflow-hidden shadow-inner">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4007.1948258851457!2d30.463202905130615!3d50.38882080941747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4c8e026bebdd3%3A0x81a80eae9827d206!2z0LLRg9C70LjRhtGPINCh0YLQtdC_0LDQvdCwINCg0YPQtNC90LjRhtGM0LrQvtCz0L4sIDMvNywg0JrQuNGX0LIsINCj0LrRgNCw0ZfQvdCwLCAwMjAwMA!5e0!3m2!1suk!2sde!4v1773951735633!5m2!1suk!2sde"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Google Maps"
+                ></iframe>
+            </div>
         </div>
     );
 }
