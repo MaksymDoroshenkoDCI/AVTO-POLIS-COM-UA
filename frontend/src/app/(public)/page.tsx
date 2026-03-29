@@ -5,6 +5,38 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Shield, Car, Globe, Umbrella, Plane, CheckCircle, ArrowRight, Star, Quote, Phone, Mail, ChevronRight, Calculator, Lock, Gift, Search } from 'lucide-react';
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'InsuranceAgency',
+  'name': 'Avto-Polis',
+  'alternateName': 'Авто Поліс',
+  'url': 'https://avto-polis.com.ua',
+  'logo': 'https://avto-polis.com.ua/logo.png',
+  'contactPoint': {
+    '@type': 'ContactPoint',
+    'telephone': '+38-097-717-21-21',
+    'contactType': 'customer service',
+    'areaServed': 'UA',
+    'availableLanguage': ['Ukrainian', 'Russian']
+  },
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': 'вул. Степана Руданського, 3/7',
+    'addressLocality': 'Київ',
+    'postalCode': '03189',
+    'addressCountry': 'UA'
+  },
+  'sameAs': [
+    'https://instagram.com/avtopolis',
+    'https://t.me/avtopolis'
+  ],
+  'description': 'Надійний онлайн сервіс страхування в Україні: Автоцивілка, КАСКО, Зелена карта.',
+  'areaServed': {
+    '@type': 'Country',
+    'name': 'Ukraine'
+  }
+};
+
 export default function Home() {
   const services = [
     {
@@ -95,13 +127,17 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ═══════════════════════ HERO SECTION ═══════════════════════ */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
             src="/avtocivilka-2048x1367.jpg"
-            alt=""
+            alt="Оформлення автоцивілки та страхування онлайн - Avto-Polis"
             fill
             className="object-cover"
             priority
