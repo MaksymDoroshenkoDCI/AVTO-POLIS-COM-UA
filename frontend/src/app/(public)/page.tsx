@@ -28,7 +28,7 @@ const jsonLd = {
   },
   'sameAs': [
     'https://instagram.com/avtopolis',
-    'https://t.me/avtopolis'
+    'https://t.me/avtopoliscomua'
   ],
   'description': 'Надійний онлайн сервіс страхування в Україні: Автоцивілка, КАСКО, Зелена карта.',
   'areaServed': {

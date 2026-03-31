@@ -35,7 +35,7 @@ const FloatingActions = () => {
                     initial={{ opacity: 0, scale: 0.5, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.5, y: 20 }}
-                    href="https://t.me/avtopolis"
+                    href="https://t.me/avtopoliscomua"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-blue-600 transition-all hover:-translate-y-1 group relative"
