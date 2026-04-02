@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, User } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -87,6 +87,10 @@ const Navbar = () => {
                                 <Phone className="h-4 w-4" />
                                 <span>+38 (097) 717-21-21</span>
                             </a>
+                            <Link href="/login" className="flex items-center space-x-2 text-gray-700 hover:text-blue-700 font-medium transition-colors text-sm border-l border-gray-200 pl-6 ml-2">
+                                <User className="h-5 w-5" />
+                                <span>Увійти</span>
+                            </Link>
                         </div>
 
                         {/* Mobile Toggle */}
@@ -128,6 +132,14 @@ const Navbar = () => {
                             >
                                 +38 (097) 717-21-21
                             </a>
+                            <Link
+                                href="/login"
+                                className="flex items-center justify-center w-full px-5 py-3 bg-gray-100 text-gray-700 rounded-lg font-bold space-x-2"
+                                onClick={() => setIsOpen(false)}
+                            >
+                                <User className="h-5 w-5" />
+                                <span>Увійти / Кабінет</span>
+                            </Link>
                             {/* Mobile Social */}
                             <div className="flex items-center justify-center space-x-4 pt-4 border-t border-gray-100">
                                 <a href="https://t.me/avtopoliscomua" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-500">
