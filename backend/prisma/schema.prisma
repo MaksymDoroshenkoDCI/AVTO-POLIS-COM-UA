@@ -104,3 +104,25 @@ model PageContent {
   content   Json
   updatedAt DateTime @updatedAt
 }
+
+model Review {
+  id        String   @id @default(uuid())
+  author    String
+  text      String
+  rating    Int      @default(5)
+  avatarUrl String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  basePrice   Float
+  icon        String? // Напр. назва іконки Lucide або лінк на картинку
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
