@@ -27,6 +27,7 @@ const Navbar = () => {
         { name: 'Головна', href: '/' },
         { name: 'Онлайн страхування', href: '/services' },
         { name: 'Контакти', href: '/contacts' },
+        { name: 'Мій Кабінет', href: '/cabinet' },
     ];
 
     return (

@@ -6,6 +6,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { NewsModule } from './news/news.module';
 import { ConsultationsModule } from './consultations/consultations.module';
+import { MtibuModule } from './mtibu/mtibu.module';
+import { VehiclesModule } from './vehicles/vehicles.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { ConsultationsModule } from './consultations/consultations.module';
     AuthModule,
     NewsModule,
     ConsultationsModule,
+    MtibuModule,
+    VehiclesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
