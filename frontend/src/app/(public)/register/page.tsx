@@ -3,16 +3,24 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Lock, User, UserPlus, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Тут буде логіка реєстрації (виклик POST /auth/register на бекенді)
-    console.log('Registering with', name, email, password);
+    setLoading(true);
+    
+    setTimeout(() => {
+      console.log('Registering with', name, email, password);
+      // Успішно зареєстровано, перекидаємо в кабінет
+      router.push('/cabinet');
+    }, 600);
   };
 
   return (
@@ -81,12 +89,13 @@ export default function RegisterPage() {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-md transition-all"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-orange-500 hover:bg-orange-600 disabled:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-md transition-all"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <UserPlus className="h-5 w-5 text-orange-200 group-hover:text-white" aria-hidden="true" />
               </span>
-              Зареєструватися
+              {loading ? 'Зачекайте...' : 'Зареєструватися'}
             </button>
           </div>
         </form>

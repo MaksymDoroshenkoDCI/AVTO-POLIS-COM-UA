@@ -3,16 +3,28 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Mail, Lock, LogIn, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Тут буде логіка авторизації (виклик POST /auth/login на бекенді)
-    console.log('Logging in with', email, password);
-    // Після успіху: router.push('/cabinet') або router.push('/admin')
+    setLoading(true);
+    
+    // Імітація запиту до бекенду
+    setTimeout(() => {
+      console.log('Logging in with', email, password);
+      // Тимчасово: якщо це пошта адміна, кидаємо в адмінку, інакше в кабінет
+      if (email === 'mdoroshenko1@gmail.com') {
+        router.push('/admin');
+      } else {
+        router.push('/cabinet');
+      }
+    }, 600);
   };
 
   return (
@@ -85,12 +97,13 @@ export default function LoginPage() {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md transition-all"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md transition-all"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LogIn className="h-5 w-5 text-blue-500 group-hover:text-blue-400" aria-hidden="true" />
               </span>
-              Увійти
+              {loading ? 'Зачекайте...' : 'Увійти'}
             </button>
           </div>
         </form>
