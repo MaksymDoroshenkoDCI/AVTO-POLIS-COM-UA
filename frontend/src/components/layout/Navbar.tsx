@@ -27,7 +27,6 @@ const Navbar = () => {
         { name: 'Головна', href: '/' },
         { name: 'Онлайн страхування', href: '/services' },
         { name: 'Контакти', href: '/contacts' },
-        { name: 'Мій Кабінет', href: '/cabinet' },
     ];
 
     return (
@@ -138,7 +137,7 @@ const Navbar = () => {
                                 onClick={() => setIsOpen(false)}
                             >
                                 <User className="h-5 w-5" />
-                                <span>Увійти / Кабінет</span>
+                                <span>Увійти</span>
                             </Link>
                             {/* Mobile Social */}
                             <div className="flex items-center justify-center space-x-4 pt-4 border-t border-gray-100">

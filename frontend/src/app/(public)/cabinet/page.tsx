@@ -79,8 +79,8 @@ export default function ClientDashboard() {
           )}
         </div>
 
-        {/* Права колонка: Результат */}
-        <div className="md:col-span-2">
+        {/* Права колонка: Результат або Гараж */}
+        <div className="md:col-span-2 space-y-8">
           {result ? (
             <div className="border border-green-200 rounded-2xl p-6 bg-green-50/30">
               <div className="flex items-center text-green-700 mb-6">
@@ -115,18 +115,54 @@ export default function ClientDashboard() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-gray-100">
+                <div className="mt-8 pt-6 border-t border-gray-100 flex gap-4">
                   <button className="px-6 py-3 bg-orange-500 text-white rounded-lg font-bold hover:bg-orange-600 transition-colors w-full sm:w-auto text-sm shadow-md">
-                    Зберегти авто в мій гараж
+                    Зберегти в Мій Гараж
+                  </button>
+                  <button 
+                    onClick={() => setResult(null)}
+                    className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-bold hover:bg-gray-200 transition-colors w-full sm:w-auto text-sm"
+                  >
+                    Назад до Гаража
                   </button>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center text-gray-400 border-2 border-dashed border-gray-200 rounded-2xl p-10 text-center">
-              <Shield className="w-16 h-16 mb-4 text-gray-300" />
-              <p>Введіть номерний знак ліворуч, щоб перевірити наявність полісу.</p>
-              <p className="text-sm mt-2 max-w-sm">Знайдені поліси можна буде додати у ваш особистий список автомобілів для автоматичних нагадувань.</p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+              <h2 className="text-xl font-bold mb-6 flex items-center">
+                <Shield className="mr-2 text-orange-500" />
+                Мій Гараж (Збережені авто)
+              </h2>
+              
+              <div className="space-y-4">
+                {/* Заглушка автомобіля в гаражі */}
+                <div className="flex items-center justify-between p-4 border border-gray-100 rounded-xl hover:shadow-md transition-shadow bg-gray-50/50">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-4">
+                      <Car className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-gray-900">Renault Megane</h4>
+                      <div className="flex items-center text-sm mt-1">
+                        <span className="px-2 py-0.5 bg-white border border-gray-200 rounded font-mono text-xs font-bold mr-2">АА1234ВВ</span>
+                        <span className="text-green-600 font-medium flex items-center text-xs">
+                          <CheckCircle className="w-3 h-3 mr-1" /> Діє до 12.10.2026
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button className="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                    Деталі
+                  </button>
+                </div>
+
+                {/* Якщо гараж пустий - показуємо підказку */}
+                {/* <div className="text-center py-10 text-gray-400">
+                  <Car className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                  <p>Ваш гараж порожній. Перевірте поліс ліворуч та додайте авто.</p>
+                </div> */}
+              </div>
             </div>
           )}
         </div>
