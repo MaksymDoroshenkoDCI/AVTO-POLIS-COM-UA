@@ -95,8 +95,8 @@ export default function GreenCardPage() {
             <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-green-500/20 text-green-400 text-sm font-bold border border-green-500/30 mb-6 backdrop-blur-sm">
               <Globe className="w-4 h-4 mr-2" /> СТРАХУВАННЯ ДЛЯ ВИЇЗДУ ЗА КОРДОН
             </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter">
-              Зелена <span className="text-green-500">Картка</span>
+            <h1 className="text-5xl md:text-7xl font-black text-green-500 mb-6 uppercase tracking-tighter">
+              Зелена Картка
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
               Обов'язкове страхування для безпечних подорожей Європою. Оформлення онлайн за 5 хвилин з миттєвим внесенням у базу МТСБУ.
