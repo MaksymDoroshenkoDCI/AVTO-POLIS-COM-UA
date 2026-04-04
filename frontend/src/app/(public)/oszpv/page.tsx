@@ -11,7 +11,9 @@ import {
   AlertTriangle,
   Zap,
   ChevronRight,
-  Info
+  Info,
+  Search,
+  Loader2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -34,10 +36,55 @@ export default function OSZPVPage() {
   const [region, setRegion] = useState('small_towns');
   const [engine, setEngine] = useState('up_to_1600');
   const [isPrivileged, setIsPrivileged] = useState(false);
+  const [plate, setPlate] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [vehicleInfo, setVehicleInfo] = useState<any>(null);
   const [price, setPrice] = useState(0);
 
   // Базовий тариф (ринковий орієнтир 2026)
   const baseTariff = 1400;
+
+  const handleSearchPlate = async () => {
+    if (!plate || plate.length < 4) return;
+    
+    setIsLoading(true);
+    setError('');
+    setVehicleInfo(null);
+
+    try {
+      const res = await fetch(`http://localhost:3001/vehicles/info/${plate}`);
+      if (!res.ok) {
+        throw new Error('Авто не знайдено в базі МВС');
+      }
+      const result = await res.json();
+      const vehicle = result.data;
+      setVehicleInfo(vehicle);
+
+      // Автоматично виставляємо параметри для розрахунку
+      // 1. Двигун
+      if (vehicle.engineVolume > 0) {
+        if (vehicle.engineVolume <= 1600) setEngine('up_to_1600');
+        else if (vehicle.engineVolume <= 2000) setEngine('1601_2000');
+        else if (vehicle.engineVolume <= 3000) setEngine('2001_3000');
+        else setEngine('over_3000');
+      } else if (vehicle.fuel === 'ELECTRIC') {
+        setEngine('electric');
+      }
+
+      // 2. Регіон (проста логіка для демонстрації)
+      if (vehicle.registrationCity === 'КИЇВ') {
+        setRegion('kyiv');
+      } else if (['ЛЬВІВ', 'ХАРКІВ', 'ОДЕСА', 'ДНІПРО'].includes(vehicle.registrationCity)) {
+        setRegion('large_cities');
+      }
+
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     const regionFactor = regions.find(r => r.id === region)?.factor || 1;
@@ -89,7 +136,46 @@ export default function OSZPVPage() {
               </div>
 
               <div className="space-y-12">
-                {/* Region */}
+                {/* Plate Search */}
+                <div className="bg-blue-50 p-6 rounded-[32px] border border-blue-100 mb-8">
+                  <label className="text-[10px] font-black text-blue-600 uppercase tracking-[0.2em] block mb-4">Швидкий пошук за номером</label>
+                  <div className="flex gap-3">
+                    <input 
+                      type="text" 
+                      placeholder="AA 1111 BB"
+                      value={plate}
+                      onChange={(e) => setPlate(e.target.value.toUpperCase())}
+                      className="flex-1 bg-white border-2 border-blue-100 rounded-2xl px-6 py-4 font-black text-xl uppercase tracking-widest focus:border-blue-500 outline-none transition-all placeholder:text-blue-100"
+                    />
+                    <button 
+                      onClick={handleSearchPlate}
+                      disabled={isLoading || !plate}
+                      className="bg-blue-600 text-white px-8 rounded-2xl font-black hover:bg-blue-700 transition-all flex items-center shadow-lg shadow-blue-600/20 disabled:opacity-50"
+                    >
+                      {isLoading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Search className="w-6 h-6" />}
+                    </button>
+                  </div>
+                  
+                  <AnimatePresence>
+                    {error && (
+                      <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-red-500 text-[10px] font-black uppercase mt-4 italic">
+                        {error}
+                      </motion.p>
+                    )}
+                    {vehicleInfo && (
+                      <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="mt-4 pt-4 border-t border-blue-100">
+                        <p className="text-blue-900 font-black text-sm uppercase tracking-tight">
+                          {vehicleInfo.make} {vehicleInfo.model} ({vehicleInfo.year})
+                        </p>
+                        <p className="text-blue-400 text-[10px] font-bold uppercase tracking-wider mt-1">
+                          Реєстрація: {vehicleInfo.registrationCity} • {vehicleInfo.engineVolume > 0 ? `${vehicleInfo.engineVolume} см³` : 'Electric'}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                <div className="grid grid-cols-1 gap-12">
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center">
