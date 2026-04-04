@@ -25,6 +25,7 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'Головна', href: '/' },
+        { name: 'Зелена карта', href: '/green-card' },
         { name: 'Онлайн страхування', href: '/services' },
         { name: 'Контакти', href: '/contacts' },
     ];
