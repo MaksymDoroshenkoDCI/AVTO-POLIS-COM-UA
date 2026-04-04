@@ -63,11 +63,11 @@ const Footer = () => {
                     {/* Insurance Products */}
                     <div>
                         <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-5">Онлайн страхування</h3>
-                        <ul className="space-y-3 text-gray-500 text-sm">
-                            <li><Link href="/services" className="hover:text-gray-900 transition-colors">Автоцивілка</Link></li>
-                            <li><Link href="/services" className="hover:text-gray-900 transition-colors">Зелена Карта</Link></li>
-                            <li><Link href="/services" className="hover:text-gray-900 transition-colors">КАСКО</Link></li>
-                            <li><Link href="/services" className="hover:text-gray-900 transition-colors">Туристичне страхування</Link></li>
+                        <ul className="space-y-3 text-gray-500 text-sm font-bold">
+                            <li><Link href="/oszpv" className="hover:text-blue-600 transition-colors">Автоцивілка</Link></li>
+                            <li><Link href="/green-card" className="hover:text-blue-600 transition-colors">Зелена Карта</Link></li>
+                            <li><Link href="/kasko" className="hover:text-blue-600 transition-colors">КАСКО</Link></li>
+                            <li><Link href="/travel" className="hover:text-blue-600 transition-colors">Туристичне страхування</Link></li>
                         </ul>
                     </div>
 

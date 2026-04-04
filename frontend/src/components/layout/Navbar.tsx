@@ -32,9 +32,9 @@ const Navbar = () => {
                 { name: 'Автоцивілка', href: '/oszpv', icon: <Car className="h-4 w-4" /> },
                 { name: 'КАСКО', href: '/kasko', icon: <Shield className="h-4 w-4" /> },
                 { name: 'Зелена карта', href: '/green-card', icon: <Globe className="h-4 w-4" /> },
+                { name: 'Туризм', href: '/travel', icon: <Globe className="h-4 w-4" /> },
             ]
         },
-        { name: 'Зелена карта', href: '/green-card' },
         { name: 'Контакти', href: '/contacts' },
     ];
 
