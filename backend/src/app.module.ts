@@ -8,6 +8,7 @@ import { NewsModule } from './news/news.module';
 import { ConsultationsModule } from './consultations/consultations.module';
 import { MtibuModule } from './mtibu/mtibu.module';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
     ConsultationsModule,
     MtibuModule,
     VehiclesModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
