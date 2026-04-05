@@ -1,6 +1,5 @@
-import { Injectable, NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import axios from 'axios';
 
 @Injectable()
 export class VehiclesService {
@@ -12,23 +11,35 @@ export class VehiclesService {
 
     // Якщо ключ не встановлено, використовуємо мок-дані для розробки
     if (!apiKey) {
-      console.warn('OPENDATABOT_API_KEY non set. Using fallback mock data.');
+      console.warn('OPENDATABOT_API_KEY not set. Using fallback mock data.');
       return this.getMockData(formattedPlate);
     }
 
     try {
-      // Запит до Opendatabot API
-      const response = await axios.get(`https://opendatabot.ua/api/v3/transport?number=${formattedPlate}`, {
+      // Запит до Opendatabot API через нативний fetch (безпечніше)
+      const response = await fetch(`https://opendatabot.ua/api/v3/transport?number=${formattedPlate}`, {
+        method: 'GET',
         headers: {
-          'Authorization': `Bearer ${apiKey}`
+          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json'
         }
       });
 
-      if (!response.data || response.data.length === 0) {
+      if (response.status === 404) {
+        throw new NotFoundException(`Автомобіль з номером ${plate} не знайдено`);
+      }
+
+      if (!response.ok) {
+        throw new Error(`Opendatabot API error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      if (!data || !Array.isArray(data) || data.length === 0) {
         throw new NotFoundException(`Автомобіль з номером ${plate} не знайдено в базі`);
       }
 
-      const vehicle = response.data[0]; // Беремо перший знайдений запис
+      const vehicle = data[0]; 
 
       return {
         success: true,
@@ -44,13 +55,14 @@ export class VehiclesService {
         }
       };
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        throw new NotFoundException(`Автомобіль з номером ${plate} не знайдено`);
-      }
-      console.error('Opendatabot API Error:', error.message);
+      console.error('Vehicle Search Error:', error.message);
       
-      // Як запасний варіант (fallback) при помилці API — мок дані, щоб сайт не "падав"
-      return this.getMockData(formattedPlate);
+      // Як запасний варіант (fallback) при помилці API чи мережі — мок дані
+      try {
+        return this.getMockData(formattedPlate);
+      } catch (e) {
+        throw error; // Якщо і в моках немає, кидаємо оригінальну помилку
+      }
     }
   }
 

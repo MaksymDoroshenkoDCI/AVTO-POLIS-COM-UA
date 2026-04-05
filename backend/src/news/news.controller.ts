@@ -18,6 +18,11 @@ export class NewsController {
         return this.newsService.findAll();
     }
 
+    @Get('seed')
+    seed() {
+        return this.newsService.seed();
+    }
+
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.newsService.findOne(id);
