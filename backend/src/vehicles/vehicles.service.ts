@@ -7,20 +7,20 @@ export class VehiclesService {
 
   async getInfoByPlate(plate: string) {
     const formattedPlate = plate.toUpperCase().replace(/\s/g, '');
-    const apiKey = this.configService.get<string>('OPENDATABOT_API_KEY');
+    const apiKey = this.configService.get<string>('AVTOREYESTR_API_KEY');
 
     // Якщо ключ не встановлено, використовуємо мок-дані для розробки
     if (!apiKey) {
-      console.warn('OPENDATABOT_API_KEY not set. Using fallback mock data.');
+      console.warn('AVTOREYESTR_API_KEY not set. Using fallback mock data.');
       return this.getMockData(formattedPlate);
     }
 
     try {
-      // Запит до Opendatabot API через нативний fetch (безпечніше)
-      const response = await fetch(`https://opendatabot.ua/api/v3/transport?number=${formattedPlate}`, {
+      // Запит до Avtoreyestr API через нативний fetch
+      const response = await fetch(`https://api.avtoreyestr.org/partner/v1/vehicles/search-by-number/${formattedPlate}`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${apiKey}`,
+          'Authorization': `ApiKey ${apiKey}`,
           'Accept': 'application/json'
         }
       });
@@ -30,27 +30,26 @@ export class VehiclesService {
       }
 
       if (!response.ok) {
-        throw new Error(`Opendatabot API error: ${response.statusText}`);
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(`Avtoreyestr API error: ${response.status} ${JSON.stringify(errorData)}`);
       }
 
-      const data = await response.json();
+      const vehicle = await response.json();
 
-      if (!data || !Array.isArray(data) || data.length === 0) {
-        throw new NotFoundException(`Автомобіль з номером ${plate} не знайдено в базі`);
+      if (!vehicle || !vehicle.vin) {
+        throw new NotFoundException(`Дані про автомобіль з номером ${plate} неповні або відсутні`);
       }
-
-      const vehicle = data[0]; 
 
       return {
         success: true,
         data: {
-          make: vehicle.brand,
-          model: vehicle.model,
-          year: vehicle.year,
+          make: vehicle.brand || 'UNKNOWN',
+          model: vehicle.model || 'UNKNOWN',
+          year: vehicle.make_year || 0,
           engineVolume: vehicle.capacity || 0,
           fuel: vehicle.fuel || 'UNKNOWN',
           type: vehicle.body || 'UNKNOWN',
-          registrationCity: vehicle.address || 'UNKNOWN',
+          registrationCity: vehicle.dep || 'UNKNOWN',
           vin: vehicle.vin || 'HIDDEN'
         }
       };
@@ -61,7 +60,7 @@ export class VehiclesService {
       try {
         return this.getMockData(formattedPlate);
       } catch (e) {
-        throw error; // Якщо і в моках немає, кидаємо оригінальну помилку
+        throw error;
       }
     }
   }
